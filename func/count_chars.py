@@ -6,6 +6,7 @@ def count_chars(text):
             chars_dictionary[char] += 1
         else:
             chars_dictionary[char] = 1
+
     return chars_dictionary
 
 # Count vowels and consonants
@@ -19,4 +20,5 @@ def count_vowels_and_consonants(text):
             vowel_count += 1
         else:
             consonant_count += 1
+    
     return vowel_count, consonant_count

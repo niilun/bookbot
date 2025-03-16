@@ -1,26 +1,28 @@
-import os, platform
+from time import sleep
 from func.send_greeting import *
 from func.file_management import *
 from func.read_options import *
 
 def save_settings(current_options):
     settings_export = ""
-    for i in range(0, len(current_options)):
-        settings_export += current_options[i]['option'] + ", " + str(current_options[i]['value']) + ", "
+    for setting in current_options:
+        settings_export += setting['option'] + ", " + str(setting['value']) + ", "
+
+    # Save converted export
     with open('options', 'w') as f:
-        f.write(settings_export[:-2]) # except last 2 chars for ", "
+        f.write(settings_export[:-2]) # except last 2 chars to account for ", "
 
 # Create (or reset) options list
 def create_or_reset_options():
     create_file_write('options', 
-"exit after finishing report, 0, save to file, 0, report more characters, 0, display vowel count, 1, display consonant count, 1")
+"save to file, 0, report more characters, 0")
 
 def options_main_menu():
     send_greeting('options')
 
     # Read options file & print options
     try:
-        open('options') # Exist-check to jump into except
+        open('options') # If options file is not found create it
     except FileNotFoundError:
         create_or_reset_options()
         

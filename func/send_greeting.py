@@ -1,11 +1,15 @@
-from time import sleep
 import platform, os
 
-def send_greeting(type):
+def clear_prompt_screen():
+    os.system('cls' if platform.system() == 'Windows' else 'clear')
+
+def send_greeting(type, clear_screen = True):
+    if clear_screen:
+        clear_prompt_screen()
+
     # start
     if type == "start":
         from main import version
-        os.system('cls' if platform.system() == 'Windows' else 'clear')
         print(f"""
     ╔═══════════════════════╗
     ║    Bookbot! v{version}    ║
@@ -15,31 +19,16 @@ def send_greeting(type):
     ╠═══════════════════════╝
     ║""")
 
-    # exit (unused, use if need to save)
-    elif type == "exit5":
-        os.system('cls' if platform.system() == 'Windows' else 'clear')
-        for i in range(5, 0, -1):
-            print(f"""
-    ╔═══════════════════════╗
-    ║        Bookbot        ║
-    ║     is exiting...     ║
-    ║           {i}           ║
-    ╚═══════════════════════╝
-          """)
-            sleep(1)
-
-    # quick exit
+    # exit
     elif type == 'quickexit':
-        os.system('cls' if platform.system() == 'Windows' else 'clear')
         print("""
     ╔═══════════════════════╗
     ║        Bookbot!       ║
     ║                       ║
-    ║       Exiting...      ║
     ║        Goodbye!       ║
     ╚═══════════════════════╝""")
+    
     elif type == 'select-modal':
-        os.system('cls' if platform.system() == 'Windows' else 'clear')
         print("""    
     ╔══════════════════════════════════╗
     ║             Bookbot              ║
@@ -49,16 +38,16 @@ def send_greeting(type):
     ║   works to choose this option!   ║
     ║   1 - Console   ║   2 - Window   ║
     ╠══════════════════════════════════╝""")
+    
     elif type == 'window-running':
-        os.system('cls' if platform.system() == 'Windows' else 'clear')
         print("""    
     ╔══════════════════════════════════╗
     ║             Bookbot              ║
     ║    Is running in window mode     ║
     ║ Swap to the new window to use it ║
     ╚══════════════════════════════════╝""")
+    
     elif type == 'help':
-         os.system('cls' if platform.system() == 'Windows' else 'clear')
          print("""    
     ╔══════════════════════════════════╗
     ║                Help              ║
@@ -82,7 +71,6 @@ def send_greeting(type):
 
     # options
     elif type == 'options':
-            os.system('cls' if platform.system() == 'Windows' else 'clear')
             print(
 """    ║
     ║                       Options                       
@@ -93,6 +81,7 @@ def send_greeting(type):
     ║
     ║ Type option name to toggle:
     ║                                                     """)
+    
     # else it's an error
     else:
         raise TypeError
